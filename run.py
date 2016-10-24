@@ -3,7 +3,7 @@ from discord.ext import commands
 
 description = 'A bot straight from hell!'
 
-bot = commands.Bot(command_prefix='!', description=description)
+bot = commands.Bot(command_prefix='$', description=description)
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
