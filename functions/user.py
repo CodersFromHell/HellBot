@@ -2,7 +2,10 @@ import discord
 import levels, cookies
 
 class CustomUser():
-    customUsers = {} # maps discord.Member back to CustomMember
+    @staticmethod
+    def cUserFrom(server : discord.Server, member : discord.Member):
+        # looks up member from database
+        pass
     def __init__(self,member : discord.Member):
         self.member = member
         self.cookies = Cookie(self)
