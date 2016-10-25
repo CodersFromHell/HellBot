@@ -13,9 +13,14 @@ logger.addHandler(handler)
 
 @bot.event
 async def on_ready():
-	print('Logged in as')
-	print(bot.user.name)
-	print(bot.user.id)
-	print(' --- ')
+    print('Logged in as')
+    print(bot.user.name)
+    print(bot.user.id)
+    print(' --- ')
 
-bot.run('') 
+@bot.async_event
+def on_message(msg):
+    content = msg.content
+    perms = msg.author.server_permissions
+
+bot.run('token') 
