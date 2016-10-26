@@ -1,6 +1,12 @@
 import discord, logging, asyncio, urllib.parse
 from discord.ext import commands
-from functions import *
+from functions import levels
+from functions import user
+from functions import admintools
+from functions import cookies
+from functions import latex
+from functions import music
+from functions import notifications
 
 description = 'A bot straight from hell!'
 
