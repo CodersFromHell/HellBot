@@ -2,7 +2,7 @@ import json, random
 
 class Level:
     def __init__(self):
-        self.path = "functions/conf/levels.json"
+        self.path = "conf/levels.json"
         self.cooldown = 5
         self.timestamps = {}
         try:
