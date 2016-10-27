@@ -9,4 +9,3 @@ import all Functions by *
 from .admintools import Mute
 from .cookies import Cookie
 from .levels import Level
-from .user import CustomUser
