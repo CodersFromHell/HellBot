@@ -1,12 +1,8 @@
 import discord, logging, asyncio, urllib.parse
 from discord.ext import commands
-from functions import levels
-from functions import user
-from functions import admintools
-from functions import cookies
-from functions import latex
-from functions import music
-from functions import notifications
+from functions import *
+
+level = levels.Level()
 
 description = 'A bot straight from hell!'
 
@@ -30,10 +26,11 @@ async def on_ready():
     # add them to CustomUser dict
 
 @bot.async_event
-def on_message(msg):
+async def on_message(msg):
     content = msg.content
     member = msg.author
+    await level.on_message(bot, msg)
     perms = member.server_permissions
-    c_user = CustomUser.fromMember()
+    #c_user = user.CustomUser.fromMember()
 
-bot.run('token') 
+bot.run('token')
