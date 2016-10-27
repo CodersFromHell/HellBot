@@ -1,35 +1,52 @@
-import discord, time, random
-import user
+import json
 
 class Level():
-    def __init__(self, user : CustomUser):
-        self.parent = user
-        self.level = 0
-        self.xp = 0
-        self.lastMinuteChatted = 0
-        # this is used so the object can refer to the user that has this object
+    def __init__(self):
+        self.path = "functions/conf/levels.json"
+        try:
+            self.__load_json()
+        except Exception:
+            self.prepare = {0:{"xp":0,"lvl":0}}
+            self.__prepare_json()
+            self.__load_json()
 
-    @staticmethod
-    # gets the total amount of XP required to level up from level n-1 to level n
-    def getXpToLevelUpTo(level):
-        return 100 + 20*(level-1)
-        # we can change this later
+    def __load_json(self):
+        file = open(self.path, "r")
+        self.users = json.load(file)
+        file.close()
 
-    @staticmethod
-    # gets the current time in minutes
-    def currentTimeMinutes():
-        return int(time.time() * 60)
+    def __prepare_json(self):
+        file = open(self.path, "w+")
+        file.write(json.dumps(self.prepare))
+        file.close()
 
-    def onChat(self):
-        if currentTimeMinutes() > self.lastMinuteChatted:
-        self.xp += random.randint(7,12)
+    def __update_json(self):
+        file = open(self.path, "w+")
+        file.write(json.dumps(self.users))
+        file.close()
 
-    def checkForLevelUp(self): # checks for level up, should be called on message sent
-        while self.xp >= getXpToLevelUpTo(self.level + 1):
-        self.xp -= getXpToLevelUpTo(self.level + 1)
-        self.level += 1
-        # send level up message
+    def test_json(self, user):
+        print(user.id)
+        self.users[user.id]['xp'] = 10
+        self.__update_json()
 
-    def printXP(self):
-        pass
-        # send XP message
+    def add_xp(self, user, amount):
+        self.users[user.id]['xp'] += amount
+
+    def remove_xp(self, user, amount):
+        self.user[user.id]['xp'] -= amount
+
+    def levelup(self, user):
+        self.users[user.id]['lvl'] += 1
+
+    def get_current_xp(self, user):
+        return self.users[user.id]['xp']
+
+    def get_current_level(self, user):
+        return self.users[user.id]['lvl']
+
+    def set_current_xp(self, user, amount):
+        self.users[user.id]['xp'] = amount
+
+    def set_current_level(self, user, amount):
+        self.users[user.id]['lvl'] = amount
