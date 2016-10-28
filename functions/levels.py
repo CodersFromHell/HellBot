@@ -37,7 +37,7 @@ class Level:
         try:
             self.users[user.id]
         except Exception:
-            self.users[user.id] = {"xp":0, "lvl":1, "perm":0}
+            self.users[user.id] = {"xp":0, "lvl":1, "perm":0, "name":user.name}
         try:
             self.timestamps[user.id]
         except:

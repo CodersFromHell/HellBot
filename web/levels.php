@@ -43,6 +43,7 @@
             users[i]['xp'] = json[keys[i]]['xp'];
             users[i]['of'] = 50 + 5 * (json[keys[i]]['lvl'] - 1);
             users[i]['lvl'] = json[keys[i]]['lvl']
+            users[i]['name'] = json[keys[i]]['name']
         }
         console.log(users)
     });
