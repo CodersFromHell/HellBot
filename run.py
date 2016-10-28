@@ -20,8 +20,7 @@ async def on_ready():
     print(' --- ')
     # for each user
     # look up user in server
-    # if not registered, add them
-    # add them to CustomUser dict
+    # if not registered, add them in database
 
 @bot.async_event
 def on_message(msg):
