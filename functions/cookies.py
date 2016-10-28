@@ -38,7 +38,7 @@ class Cookie:
 
     def __init__(self, bot):
         self.bot = bot
-        self.path = "functions/conf/cookies.json"
+        self.path = "conf/cookies.json"
         self.__load_json()
         self.startValue = 10
 
