@@ -6,12 +6,12 @@ class Permission:
         self.default_level = default_level
         self.file = file
     def setperm(self, user, level):
-        self.pjson[user.id] = [user.name, level]
+        self.pjson[user.id] = {"name":user.name, "lvl":level}
         file = open(self.file, "w", encoding="utf-8")
         file.close()
     def readperm(self, user):
         if user.id not in self.pjson: return self.default_level
-        return self.pjson[user.id][1]
+        return self.pjson[user.id]["lvl"]
     def getperm(self):
         return self.pjson
     def delperm(self, user):
@@ -19,5 +19,7 @@ class Permission:
         file = open(self.file, "w", encoding="utf-8")
         file.close()
     def testperm(self, user, level):
-        if self.pjson[user.id][1] >= level: return True
+        if self.pjson[user.id]["lvl"] >= level: return True
         return False
+    def get_name(self, user):
+        return self.pjson[user.id]["name"]
