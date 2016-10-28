@@ -34,6 +34,18 @@
     </table>
 </div>
 <script type="text/javascript">
+    users = {};
+    $.getJSON("conf/levels.json", function(json){
+        keys = Object.keys(json)
+        for(i = 0; i < keys.length; i++){
+            users[i] = {};
+            users[i]['id'] = keys[i];
+            users[i]['xp'] = json[keys[i]]['xp'];
+            users[i]['of'] = 50 + 5 * (json[keys[i]]['lvl'] - 1);
+            users[i]['lvl'] = json[keys[i]]['lvl']
+        }
+        console.log(users)
+    });
 
 </script>
 </body>
