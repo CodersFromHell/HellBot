@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans|Roboto');
+
+p,label,li,a,td {
+    font-family: sans-serif, 'Roboto';
+}
+
+body {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+code {
+    font-size: 15px;
+}
+
+.primary {
+    background-color:  #f44336;
+    color: white;
+}
+
+.primaryUp {
+    background-color: #ef9a9a;
+}
+
+.primaryUp>p,.primaryUp>label {
+    color: black;
+    opacity: 87;
+}
+
+.primaryDown {
+    background-color: #d32f2f;
+    color: white;
+}
+
+.secondary {
+    background-color: #dd2c00;
+    color: white;
+}
+
+p.white,label.white {
+    color: white;
+}
+
+p.white.second,label.white.second {
+    color: white;
+    opacity: 70;
+}
+
+/* Black Color */
+
+p.black {
+    color: black;
+    opacity: 87;
+}
+
+p.black.second {
+    color: black;
+    opacity: 54;
+}
+
+p.black:disabled {
+    color: black;
+    opacity: 38;
+}

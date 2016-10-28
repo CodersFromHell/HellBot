@@ -1,0 +1,115 @@
+/* Div Sizes */
+
+div.tiny {
+    height: 75px;
+    width: 75px;
+}
+
+div.small {
+    height: 150px;
+    width: 150px;
+}
+
+div.medium {
+    height: 200px;
+    width: 200px;
+}
+
+div.large {
+    height: 350px;
+    width: 350px;
+}
+
+div.xlarge {
+    height: 500px;
+    width: 500px;
+}
+
+/* Text Sizes */
+
+p.tiny {
+    font-size: 5px;
+}
+
+p>span.tiny {
+    font-size: 5px;
+}
+
+p.small {
+    font-size: 10px;
+}
+
+p>span.small {
+    font-size: 10px;
+}
+
+p.medium {
+    font-size: 20px;
+}
+
+p>span.medium {
+    font-size: 20px;
+}
+
+p.large {
+    font-size: 40px;
+}
+
+p>span.large {
+    font-size: 40px;
+}
+
+p.large {
+    font-size: 40px;
+}
+
+p>span.xlarge {
+    font-size: 80px;
+}
+
+h1.tiny {
+    font-size: 15px;
+}
+
+h1.small {
+    font-size: 30px;
+}
+
+h1.medium {
+    font-size: 60px;
+}
+
+h1.large {
+    font-size: 120px;
+}
+
+h1.xlarge {
+    font-size: 240px;
+}
+
+
+/* Align */
+
+.push-right {
+    align-content: right;
+}
+
+.push-left {
+    align-content: left;
+}
+
+.push-center {
+    align-content: center;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-left {
+    text-align: left;
+}
