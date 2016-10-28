@@ -1,6 +1,7 @@
 import discord, logging, asyncio, urllib.parse
 from discord.ext import commands
 from functions import *
+from data import permission
 
 level = levels.Level()
 
@@ -13,6 +14,7 @@ logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='discord.log', encoding='UTF-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
+perm = permission.Permission("conf/permission.json")
 
 @bot.event
 async def on_ready():
@@ -22,8 +24,7 @@ async def on_ready():
     print(' --- ')
     # for each user
     # look up user in server
-    # if not registered, add them
-    # add them to CustomUser dict
+    # if not registered, add them in database
 
 @bot.async_event
 async def on_message(msg):
