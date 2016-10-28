@@ -14,6 +14,10 @@ class Cookie:
     KILL_YOURSELF - Don't use it! Just don't use it!
     """
 
+    """
+    why don't we make this an actual enum
+    """
+
     ERR = -1
     SUCCESS = 0
     NO_COOKIES = 1
