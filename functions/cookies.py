@@ -1,9 +1,8 @@
 import discord
 import json
+from enum import Enum
 
-
-class Cookie:
-
+class ErrorCode(Enum):
     """
     Error Codes
     These are Enums for different Error Codes (It doesn't return True/False! It returns an Error Code)
@@ -14,16 +13,13 @@ class Cookie:
     KILL_YOURSELF - Don't use it! Just don't use it!
     """
 
-    """
-    why don't we make this an actual enum
-    """
-
-    ERR = -1
+    ERR = -1 
     SUCCESS = 0
     NO_COOKIES = 1
     NO_USER = 2
-    KILL_YOURSELF = "Kill Yourself!"
+    KILL_YOURSELF = 3
 
+class Cookie:
     def __load_json(self):
         file = open(self.path, "r")
         self.cfg = json.load(file)
@@ -58,36 +54,36 @@ class Cookie:
     def rem_cookies(self, user, amout=1):
         self.get_cookies(user)
         if self.cfg[user.id] == -1:
-            return self.SUCCESS
+            return ErrorCode.SUCCESS
         if self.get_cookies(user) >= amout:
             self.cfg[user.id] -= amout
             if self.__update_json():
-                return self.SUCCESS
+                return ErrorCode.SUCCESS
             else:
-                return self.ERR
+                return ErrorCode.ERR
         else:
-            return self.NO_COOKIES
+            return ErrorCode.NO_COOKIES
 
     def add_cookies(self, user, amout=1):
         self.get_cookies(user)
         if self.cfg[user.id] == -1:
-            return self.SUCCESS
+            return ErrorCode.SUCCESS
         self.cfg[user.id] += amout
         if self.__update_json():
-            return self.SUCCESS
+            return ErrorCode.SUCCESS
         else:
-            return self.ERR
+            return ErrorCode.ERR
 
     def give_cookies(self, user, to, amout=1):
         if self.get_cookies(user) >= amout:
             self.rem_cookies(user, amout)
             self.add_cookies(to, amout)
             if self.__update_json():
-                return self.SUCCESS
+                return ErrorCode.SUCCESS
             else:
-                return self.ERR
+                return ErrorCode.ERR
         else:
-            return self.NO_COOKIES
+            return ErrorCode.NO_COOKIES
 
     async def on_message(self, msg):
         if msg.author == self.bot.user:
@@ -134,7 +130,7 @@ class Cookie:
 
         for emoji in msg.content.lower().split(" "):
             if emoji == "cookie" or emoji == "🍪":
-                if self.rem_cookies(msg.author) == self.NO_COOKIES:
+                if self.rem_cookies(msg.author) == ErrorCode.NO_COOKIES:
                     await self.bot.delete_message(msg)
                     return
                 print("Removed a Cookie from {}".format(msg.author))
