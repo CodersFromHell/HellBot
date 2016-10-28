@@ -1,0 +1,7 @@
+{
+  "Owner":{"role":"Owner", "permlvl":100},
+  "Admin":{"role":"Admin", "permlvl":50, "givexp":1},
+  "Moderator":{"role":"Moderator", "permlvl":10},
+  "User":{"role":"User", "permlvl":1},
+  "Bot":{"role":"Bot", "permlvl":9000}
+}
