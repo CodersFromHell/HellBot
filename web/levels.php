@@ -39,18 +39,27 @@
     </table>
 </div>
 <script type="text/javascript">
+
+    xp = function(lvl){
+        if(lvl == 1){
+            return 0;
+        }
+        return 50 + 5 * (lvl-2) + xp(lvl-1)
+    }
+
     users = {};
     $.getJSON("conf/levels.json", function(json){
-        keys = Object.keys(json)
+        keys = Object.keys(json);
         for(i = 0; i < keys.length; i++){
             users[i] = {};
             users[i]['id'] = keys[i];
             users[i]['xp'] = json[keys[i]]['xp'];
             users[i]['of'] = 50 + 5 * (json[keys[i]]['lvl'] - 1);
             users[i]['lvl'] = json[keys[i]]['lvl'];
+            users[i]['total'] = users[i]['xp'] + xp(users[i]['lvl']);
             users[i]['name'] = json[keys[i]]['name'];
         }
-        console.log(users)
+        console.log(users);
     });
 
 </script>
