@@ -12,7 +12,7 @@ class Permission:
     def readperm(self, user):
         if user.id not in self.pjson: return self.default_level
         return self.pjson[user.id]["lvl"]
-    def getperm(self):
+    def getpjson(self):
         return self.pjson
     def delperm(self, user):
         del self.pjson[user.id]
