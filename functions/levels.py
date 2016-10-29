@@ -3,25 +3,14 @@ import json, random
 class Level:
     def __init__(self):
         self.path = "conf/levels.json"
-        self.role_path = "conf/roles.json"
         self.cooldown = 5
         self.timestamps = {}
-        self.adminable = 0  #set this to 1 and
-        self.adminCode = 0  #this to "random.randint(100000, 999999)" and
-        self.codePermLevel = 0 #this to whatever level you want to get and
-        #print(adminCode)   #uncomment this to generate an admin code
         try:
             self.users = self.__load_json(self.path)
         except Exception:
             self.prepare = {}
             self.__prepare_json(self.path)
             self.users = self.__load_json(self.path)
-        try:
-            self.roles = self.__load_json(self.role_path)
-        except Exception:
-            self.prepare = {}
-            self.__prepare_json(self.role_path)
-            self.roles = self.__load_json(self.role_path)
 
     def __load_json(self, path):
         file = open(path, "r")
@@ -48,7 +37,7 @@ class Level:
         try:
             self.users[user.id]
         except Exception:
-            self.users[user.id] = {"xp":0, "lvl":1, "role":"User", "perm":1, "name":user.name}
+            self.users[user.id] = {"xp":0, "lvl":1, "role":"User", "name":user.name}
         try:
             self.timestamps[user.id]
         except:
