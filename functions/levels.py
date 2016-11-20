@@ -1,10 +1,15 @@
 import json, random
+from .permissions import Perms
+from .command import Commands
+
 
 class Level:
     def __init__(self):
         self.path = "conf/levels.json"
         self.cooldown = 5
         self.timestamps = {}
+        self.perm = Perms(self)
+        self.command = Commands()
         try:
             self.users = self.__load_json(self.path)
         except Exception:
@@ -43,33 +48,9 @@ class Level:
         except:
             self.timestamps[user.id] = msg.timestamp
 
-        if args[0] == "$lvl" and (self.get_perm(user) >= 1 or self.roles[self.get_role(user)]["lvl"] == 1):
-            await self.send_level(bot, msg, args)
-            return
-        elif args[0] == "$xp" and (self.get_perm(user) >= 1 or self.roles[self.get_role(user)]["xp"] == 1):
-            await self.send_xp(bot, msg, args)
-            return
-        elif args[0] == "$totalxp" and (self.get_perm(user) >= 1 or self.roles[self.get_role(user)]["totalxp"] == 1):
-            await self.send_total_xp(bot, msg, args)
-            return
-        elif args[0] == "$cooldown" and (self.get_perm(user) >= 5 or self.roles[self.get_role(user)]["cooldown"] == 1):
-            await self.send_timestamp(bot, msg, args)
-            return
-        elif args[0] == "$givexp" and (self.get_perm(user) >= 10 or self.roles[self.get_role(user)]["givexp"] == 1):
-            try:
-                if args[2] == msg.mentions[0].mention:
-                    user = msg.mentions[0]
-                else:
-                    user = msg.author
-            except:
-                user = msg.author
-            try:
-                self.add_xp(user, int(args[1])+0)
-                await bot.send_message(msg.channel, "{} received {}xp".format(user.mention, args[1]))
-            except:
-                bot.send_message(msg.channel, "Invaild syntax")
-                return
-        elif args[0] == "$removexp" and (self.get_perm(user) >= 10 or self.roles[self.get_role(user)]["removexp"] == 1):
+        await self.command.on_message(self, msg, bot)
+
+        if args[0] == "$removexp" and (self.get_perm(user) >= 10 or self.roles[self.get_role(user)]["removexp"] == 1):
             try:
                 if args[2] == msg.mentions[0].mention:
                     user = msg.mentions[0]
@@ -135,12 +116,12 @@ class Level:
             self.codePermLevel = int(args[1])+0
             self.adminCode = random.randint(100000, 999999)
             print(self.adminCode)
-        elif args[0] == "$" + str(self.adminCode) and self.adminable == 1:
-            await bot.send_message(msg.channel, "{} is now has a perm level of {}".format(user.mention, self.codePermLevel))
-            self.adminable = 0
-            self.users[user.id]["perm"] = self.codePermLevel
-            self.codePermLevel = 0
-            self.adminCode = 0
+        #elif args[0] == "$" + str(self.adminCode) and self.adminable == 1:
+            #await bot.send_message(msg.channel, "{} is now has a perm level of {}".format(user.mention, self.codePermLevel))
+            #self.adminable = 0
+            #self.users[user.id]["perm"] = self.codePermLevel
+            #self.codePermLevel = 0
+            #self.adminCode = 0
         elif (msg.timestamp - self.timestamps[user.id]).total_seconds() > self.cooldown:
             self.add_xp(user, random.randint(2, 5))
             self.timestamps[user.id] = msg.timestamp
